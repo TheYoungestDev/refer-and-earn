@@ -1,9 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "abdul";
-$password = "abdullahi";
-$dbname = "abdul";
-
+$servername = "localhost:3306";
+$username = "fastrasu_referandearn";
+$password = "Alwaysthere@4321";
+$dbname = "fastrasu_referandearn";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
@@ -24,54 +23,58 @@ $sold = mysqli_real_escape_string($conn, $_POST['sold']);
 $terms = mysqli_real_escape_string($conn, $_POST['terms']);
 
 // Attempt insert query execution
+
 $sql = "INSERT INTO referandearn (firstname, lastname, company, email, country, `describe`, official, sold, terms) VALUES ('$firstname', '$lastname', '$company', '$email', '$country', '$describe', '$official', '$sold', '$terms')";
 
+// If the form is submitted successfully to database, then do this below
 
-// Define email parameters
-$to = $email;
-$subject = 'New form submission';
-$message = 'Your referral has been submitted.';
-$headers = 'From: info@fastrasuite.com' . "\r\n" .
-    'Reply-To: info@fastrasuite.com' . "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
 
-// Attempt to send email
 
-if (mysqli_query($conn, $sql))
- {
 
-  // Refresh the current tab
-  echo "<script>window.location.href = '/your-form-has-been-recorded.html';</script>";
-// Define email parameters
-$to = $email;
-$subject = 'New form submission';
+//   // Send email with form data
+use PHPMailer\PHPMailer\PHPMailer; // Phpmail package already on server
+use PHPMailer\PHPMailer\Exception; // Phpmail package already on server
 
-$message = "A new referral has been submitted with the following information:\n\n"
-. "First Name: $firstname\n"
-. "Last Name: $lastname\n"
-. "Company: $company\n"
-. "Email: $email\n"
-. "Country: $country\n"
-. "Description: $describe\n"
-. "Official: $official\n"
-. "Sold: $sold\n"
-. "Terms: $terms\n";
+require 'PHPMailer/src/PHPMailer.php'; // Phpmail package already on server
+require 'PHPMailer/src/SMTP.php'; // Phpmail package already on server
 
-$headers = 'From: info@fastrasuite.com' . "\r\n" .
-    'Reply-To: info@fastrasuite.com' . "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
+$mail = new PHPMailer();
 
-// Attempt to send email
-if (mail($to, $subject, $message, $headers)) {
-    echo 'Email sent successfully.
-    Form submitted!';
-} else {
-    echo 'Failed to send email.';
+$mail->IsSMTP(); // telling the class to use SMTP
+$mail->SMTPAuth = true; // enable SMTP authentication
+$mail->Host = "localhost"; // sets the SMTP server or use the server hostname
+$mail->Port = 25; // set the SMTP port for the GMAIL server
+$mail->Username = "info@fastrasuite.com"; // SMTP account username
+$mail->Password = "Alwaysthere@4321"; // SMTP account password
+
+$mail->SetFrom('info@fastrasuite.com');
+$mail->AddReplyTo("info@fastrasuite.com");
+$mail->Subject = "New Referral Form Submitted";
+$mail->MsgHTML("<html>
+
+        <body><em>Below is the details of the new record! </em><br><br><br>
+        <strong>First Name:</strong> $firstname,<br><br>
+        <strong>Last Name:</strong> $lastname,<br><br>
+        <strong>Email:</strong> $email,<br><br>
+        <strong>Company name:</strong> $company,<br><br>
+        <strong>Country:</strong> $country,<br><br>
+        <strong>What best describes you?:</strong> $describe`,<br><br>
+        <strong>Are you a public official?:</strong> $official,<br><br>
+        <strong>Have you sold or used an enterprise SaaS product before?:</strong> $sold,<br><br>
+        <strong>Do you agree with the terms and conditions?:</strong> $terms</body>
+
+    </html>");
+
+$mail->AddAddress("info@fastrasuite.com");
+//$mail->AddAttachment(""); // attachment
+
+//If the form is submitted successfully
+if (!$mail->Send()){
+
+} elseif (mysqli_query($conn, $sql)){
+
 }
-
-
-}
-mysqli_close($conn);
+echo "<script>window.location.href = 'https://fastrasuite.com/referandearn/registration-success.php';</script>";
 
 
 // Close connection
@@ -80,37 +83,3 @@ mysqli_close($conn);
 
 
 
-<!-- 
-if(mysqli_query($conn, $sql)) {
-  echo "Form submitted successfully.";
-
-  // Define email parameters
-  $to = 'info@fastrasuite.com'; // Replace with the actual email address of the company
-  $subject = 'New form submission';
-  $message = "A new referral has been submitted with the following information:\n\n"
-            . "First Name: $firstname\n"
-            . "Last Name: $lastname\n"
-            . "Company: $company\n"
-            . "Email: $email\n"
-            . "Country: $country\n"
-            . "Description: $describe\n"
-            . "Official: $official\n"
-            . "Sold: $sold\n"
-            . "Terms: $terms\n";
-  $headers = 'From: info@fastrasuite.com' . "\r\n" .
-      'Reply-To: info@fastrasuite.com' . "\r\n" .
-      'X-Mailer: PHP/' . phpversion();
-
-  // Attempt to send email
-  if (mail($to, $subject, $message, $headers)) {
-      echo ' Email sent successfully.';
-  } else {
-      echo ' Failed to send email.';
-  }
-} else {
-  echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-}
-
-// Close connection
-mysqli_close($conn);
-?> -->
