@@ -15,7 +15,9 @@ HTML: A JavaScript runtime built on Chrome's V8 JavaScript engine.
 
 Bootstrap: A popular CSS framework for building responsive web applications.
 
-CSS: A popular Node.js web application framework.
+CSS
+
+JavaScript
 
 PHP & Mysqli
 
