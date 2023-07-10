@@ -22,7 +22,10 @@ Start referring friends, colleagues, or anyone interested in the service or prod
 
 <h4>Technologies Used</h4>
 The Refer-and-Earn web application utilizes the following technologies:
-
+<li>HTML: Used for structuring the web pages and content.HTML5</li>
+        <li>CSS: Used for styling the web pages and enhancing the visual presentation.</li>
+        <li>JavaScript: Used to add interactivity and enhance user experience.</li>
+        <li>PHP & MySQLi: Used for server-side scripting and managing the database interactions.</li>
     
         
         
