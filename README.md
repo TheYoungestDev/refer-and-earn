@@ -1,6 +1,3 @@
-
-Contact
-For any inquiries or suggestions, please contact the developers at [iamabdullahitijani@gmail.com].<h4>Refer-and-Earn Web Application</h4>
 Welcome to the Refer-and-Earn web application!
 This repository contains a web application that allows users to refer their friends to a particular service or product and earn rewards. The primary objective of this application is to incentivize users to bring in new customers or clients to a business, ultimately expanding its customer base.
 
@@ -26,12 +23,12 @@ Start referring friends, colleagues, or anyone interested in the service or prod
 <h4>Technologies Used</h4>
 The Refer-and-Earn web application utilizes the following technologies:
 
-    <ul>
+    
         <li>HTML: Used for structuring the web pages and content.HTML5</li>
         <li>CSS: Used for styling the web pages and enhancing the visual presentation.</li>
         <li>JavaScript: Used to add interactivity and enhance user experience.</li>
         <li>PHP & MySQLi: Used for server-side scripting and managing the database interactions.</li>
-        </ul>
+        
 
 <h4>License</h4>
 The Refer-and-Earn web application is open source and is licensed under the MIT License. You are free to modify and distribute the code in accordance with the terms of the license.
